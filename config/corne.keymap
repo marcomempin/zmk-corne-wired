@@ -50,6 +50,11 @@ ZMK_BEHAVIOR(ss_cw, tap_dance,
     bindings = <&sk LSHFT>, <&caps_word>;
 )
 
+ZMK_BEHAVIOR(ss_cw2, tap_dance,
+    tapping-term-ms = <TAP_TERM_MS>;
+    bindings = <&lt SYM LSHFT>, <&caps_word>;
+)
+
 // tap: delete word (ctrl+backspace) | shift + tap: delete | hold: num layer
 ZMK_BEHAVIOR(dw_del_num, mod_morph,
     bindings = <&lt NUM RC(BSPC)>, <&kp DEL>;
@@ -71,7 +76,7 @@ ZMK_LAYER(QWERTY,
      // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
           XXX &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH       XXX
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-                                      &lt CDE ESC      &lt NAV SPACE &kp TAB       &lt FN RET    &dw_del_num   &lt SYM DEL
+                                      &lt CDE ESC      &lt NAV SPACE &kp TAB       &lt FN RET    &dw_del_num   &ss_cw2
      //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
 )
 
