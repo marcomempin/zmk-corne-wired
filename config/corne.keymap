@@ -46,9 +46,9 @@ ZMK_BEHAVIOR(hrm, hold_tap,
 
 // tap: sticky shift | double tap: capsword
 ZMK_BEHAVIOR(ss_cw, tap_dance,
-    tapping-term-ms = <TAP_TERM_MS>;
+    tapping-term-ms = <TAP_TERM_MS>;  
     bindings = <&sk LSHFT>, <&caps_word>;
-)
+)    
 
 // tap: delete word (ctrl+backspace) | shift + tap: delete | hold: num layer
 ZMK_BEHAVIOR(dw_del_num, mod_morph,
@@ -119,7 +119,7 @@ ZMK_LAYER(SYMBOL,
      // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
           XXX &kp HASH       &kp PRCNT        &kp UNDER        &kp DQT        XXX          XXX           XXX           XXX           XXX           XXX     XXX
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-                                      BSLH                XXX         XXX                 XXX           XXX          XXX
+                                      &kp BSLH                XXX         XXX                 XXX           XXX          XXX
      //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
 )
 
