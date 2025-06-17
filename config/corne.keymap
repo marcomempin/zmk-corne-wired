@@ -1,56 +1,136 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
+* Copyright (c) 2020 The ZMK Contributors
+*
+* SPDX-License-Identifier: MIT
+*/
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
 
-/ {
-        keymap {
-                compatible = "zmk,keymap";
+#include "zmk-helpers/helper.h"
 
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-                        bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
-                        >;
-                };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-                        >;
-                };
+// 42 key matrix
+#include "zmk-helpers/key-labels/42.h"
 
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
-                        >;
-                };
-        };
-};
+/* global settings */
+
+#define COMBO_TERM_FAST 18
+#define COMBO_TERM_SLOW 30
+
+#define COMBO_IDLE_FAST 150
+#define COMBO_IDLE_SLOW 50
+
+/* layer and key shortcuts */
+
+#define XXX &none
+#define ___ &trans
+
+#define TAP_TERM_MS 250
+
+#define DEF 0  // layer shortcuts, must match order in which they are defined below
+#define NAV 1
+#define NUM 2
+#define FN 3
+#define SYM 4
+#define CDE 5
+
+/* custom behaviors */
+
+// homerow mods
+ZMK_BEHAVIOR(hrm, hold_tap,
+    flavor = "balanced";
+    tapping-term-ms = <TAP_TERM_MS>;
+    quick-tap-ms = <110>;
+    bindings = <&kp>, <&kp>;
+)
+
+// tap: sticky shift | double tap: capsword
+ZMK_BEHAVIOR(ss_cw, tap_dance,
+    tapping-term-ms = <TAP_TERM_MS>;  
+    bindings = <&sk LSHFT>, <&caps_word>;
+)    
+
+// tap: delete word (ctrl+backspace) | shift + tap: delete | hold: num layer
+ZMK_BEHAVIOR(dw_del_num, mod_morph,
+    bindings = <&lt NUM RC(BSPC)>, <&kp DEL>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+/* combos */
+
+// ZMK_COMBO(left_par, &kp LPAR, RT0 RT1, QWERTY, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+// ZMK_COMBO(right_par, &kp RPAR, RT2 RT3, QWERTY, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+
+/* keymap */
+
+ZMK_LAYER(QWERTY,
+     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+          XXX &kp Q         &kp W         &kp E         &kp R         &kp T         &kp Y         &kp U         &kp I         &kp O         &kp P          XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &hrm LGUI A   &hrm LALT S   &hrm LCTRL D  &hrm LSHFT F  &kp G         &kp H         &hrm RSHFT J  &hrm RCTRL K  &hrm RALT L   &hrm RGUI SEMI XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH       XXX
+     // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                      &lt CDE ESC   &lt NAV SPACE  &ss_cw           &lt FN RET    &dw_del_num   &lt SYM TAB
+     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
+
+ZMK_LAYER(ARROWS,
+     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+          XXX XXX       &kp LC(X)     &kp LC(INS)   &kp LS(INS)       XXX           &kp PG_UP     &kp RC(X)     &kp RC(INS)   &kp RS(INS)  XXX             XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &sk LGUI      &sk LALT      &sk LCTRL     &sk LSHFT     XXX           &kp PG_DN     &kp LEFT      &kp DOWN      &kp UP       &kp RIGHT       XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX XXX           XXX           XXX           XXX           XXX           XXX           XXX           &kp HOME           &kp END          XXX    XXX
+     // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                      XXX           XXX           XXX               XXX           &kp BSPC          XXX
+     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
+
+ZMK_LAYER(NUMBER,
+     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+          XXX XXX       &kp N7        &kp N8        &kp N9        &kp PLUS          XXX           XXX           XXX           XXX           XXX            XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &kp N0    &kp N4        &kp N5        &kp N6        &kp MINUS         XXX           &sk RSHFT     &sk LCTRL     &sk LALT      &sk LGUI       XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX XXX       &kp N1        &kp N2        &kp N3        &kp STAR          XXX           XXX           &kp BSPC           XXX           XXX       XXX
+     // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                      &kp DOT       &kp FSLH      &kp EQUAL         XXX           XXX          XXX
+     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
+
+ZMK_LAYER(FUNCTION,
+     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+          XXX &kp F10       &kp F7        &kp F8        &kp F9        XXX          XXX           XXX           XXX           XXX           XXX             XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &kp F11    &kp F4        &kp F5        &kp F6        XXX         XXX           &sk RSHFT     &sk LCTRL     &sk LALT      &sk LGUI            XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &kp F12       &kp F1        &kp F2        &kp F3        XXX          XXX           XXX           XXX           XXX           XXX             XXX
+     // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                      XXX       XXX      XXX         XXX           XXX          XXX
+     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
+
+ZMK_LAYER(SYMBOL,
+     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+          XXX &kp TILDE       XXX        XXX        &kp GRAVE          &kp CARET   XXX          XXX           XXX           XXX           XXX              XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &kp AT    &kp DLLR        &kp MINUS        &kp SQT        XXX         XXX           &sk RSHFT     &sk LCTRL     &sk LALT      &sk LGUI       XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX &kp HASH       &kp PRCNT        &kp UNDER        &kp DQT        XXX          XXX           XXX           XXX           XXX           XXX     XXX
+     // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                      &kp BSLH                XXX         XXX                 XXX           XXX          XXX
+     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
+
+ZMK_LAYER(CODE,
+     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+          XXX  XXX       XXX        XXX         XXX           XXX                    XXX           &kp AMPS       &kp EXCL     &kp PIPE        XXX         XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX  XXX     XXX         XXX         XXX        XXX                        XXX           &kp LPAR       &kp RPAR     &kp LT         &kp GT       XXX
+     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+          XXX  XXX     XXX         XXX         XXX        XXX                        XXX           &kp LBRC       &kp RBRC     &kp LBKT       &kp RBKT     XXX           
+     // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                      XXX       XXX      XXX                         XXX           &kp BSPC       XXX
+     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
