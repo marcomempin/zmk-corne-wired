@@ -40,7 +40,7 @@
 ZMK_BEHAVIOR(hrm, hold_tap,
     flavor = "balanced";
     tapping-term-ms = <TAP_TERM_MS>;
-    quick-tap-ms = <125>;
+    quick-tap-ms = <110>;
     bindings = <&kp>, <&kp>;
 )
 
@@ -48,11 +48,6 @@ ZMK_BEHAVIOR(hrm, hold_tap,
 ZMK_BEHAVIOR(ss_cw, tap_dance,
     tapping-term-ms = <TAP_TERM_MS>;
     bindings = <&sk LSHFT>, <&caps_word>;
-)
-
-ZMK_BEHAVIOR(ss_cw2, tap_dance,
-    tapping-term-ms = <TAP_TERM_MS>;
-    bindings = <&lt SYM LSHFT>, <&caps_word>;
 )
 
 // tap: delete word (ctrl+backspace) | shift + tap: delete | hold: num layer
@@ -76,7 +71,7 @@ ZMK_LAYER(QWERTY,
      // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
           XXX &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH       XXX
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-                                      &lt CDE ESC      &lt NAV SPACE &kp TAB       &lt FN RET    &dw_del_num   &ss_cw2
+                                      &lt CDE ESC   &lt NAV SPACE  &ss_cw           &lt FN RET    &dw_del_num   &lt SYM TAB
      //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
 )
 
@@ -124,7 +119,7 @@ ZMK_LAYER(SYMBOL,
      // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
           XXX &kp HASH       &kp PRCNT        &kp UNDER        &kp DQT        XXX          XXX           XXX           XXX           XXX           XXX     XXX
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-                                      XXX       XXX      XXX         XXX           XXX          XXX
+                                      BSLH                XXX         XXX                 XXX           XXX          XXX
      //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
 )
 
