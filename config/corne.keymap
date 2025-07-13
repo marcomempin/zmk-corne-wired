@@ -7,6 +7,12 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+&mt {
+    tapping-term-ms = <250>;
+    quick-tap-ms = <110>;
+    flavor = "balanced";
+};
+
 / {
     combos {
         compatible = "zmk,combos";
