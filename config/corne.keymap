@@ -24,13 +24,13 @@
         };
 
         copy {
-            bindings = <&kp LC(K_COPY)>;
+            bindings = <&kp LC(C)>;
             key-positions = <26 27>;
             layers = <0>;
         };
 
         paste {
-            bindings = <&kp LC(P)>;
+            bindings = <&kp LC(V)>;
             key-positions = <27 28>;
             layers = <0>;
         };
