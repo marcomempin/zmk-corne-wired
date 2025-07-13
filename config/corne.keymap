@@ -40,29 +40,58 @@
             key-positions = <36 37 38 39 40 41>;
         };
 
-        mmo_game_mode_n1 {
+        mmo_game_mode_n7 {
             bindings = <&kp N7>;
             key-positions = <1 2>;
+            layers = <6>;
         };
 
         mmo_game_mode_n8 {
             bindings = <&kp N8>;
             key-positions = <2 3>;
+            layers = <6>;
         };
 
         mmo_game_mode_n9 {
             bindings = <&kp N9>;
             key-positions = <3 4>;
+            layers = <6>;
         };
 
         mmo_game_mode_n4 {
             bindings = <&kp NUMBER_4>;
-            key-positions = <14 13>;
+            key-positions = <13 14>;
+            layers = <6>;
+        };
+
+        mmo_game_mode_n5 {
+            bindings = <&kp NUMBER_5>;
+            key-positions = <14 15>;
+            layers = <6>;
+        };
+
+        mmo_game_mode_n6 {
+            bindings = <&kp NUMBER_6>;
+            key-positions = <15 16>;
+            layers = <6>;
         };
 
         mmo_game_mode_n1 {
             bindings = <&kp NUMBER_1>;
             key-positions = <25 26>;
+            layers = <6>;
+        };
+
+        mmo_game_mode_n2 {
+            bindings = <&kp NUMBER_2>;
+            key-positions = <26 27>;
+            layers = <6>;
+        };
+
+        mmo_game_mode_n3 {
+            bindings = <&kp NUMBER_3>;
+            key-positions = <27 28>;
+            layers = <6>;
         };
     };
 
