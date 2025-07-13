@@ -8,84 +8,83 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
-	combos {
-		compatible = "zmk,combos";
-		
-		cut {
-			bindings = <&kp LC(X)>;
-			key-positions = <25 26>;
-			layers = <0>;
-		};
-		
-		copy {
-			bindings = <&kp LC(K_COPY)>;
-			key-positions = <26 27>;
-			layers = <0>;
-		};
-		
-		paste {
-			bindings = <&kp LC(P)>;
-			key-positions = <27 28>;
-			layers = <0>;
-		};
-	};
-	
-	keymap {
-		compatible = "zmk,keymap";
-		
-		home {
-			// -----------------------------------------------------------------------------------------
-			// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-			// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-			// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-			//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-			
-			bindings = <
-			&none  &kp Q           &kp W       &kp E        &kp R         &kp T      &kp Y    &kp U              &kp I        &kp O            &kp P                    &none
-			&none  &mt LEFT_WIN A  &mt LALT S  &mt LCTRL D  &mt LSHIFT F  &kp G      &kp H    &mt RSHIFT J       &mt RCTRL K  &mt RIGHT_ALT L  &mt RIGHT_WIN SEMICOLON  &none
-			&none  &kp Z           &kp X       &kp C        &kp V         &kp B      &kp N    &kp M              &kp COMMA    &kp DOT          &kp FSLH                 &none
-			&kp ESC      &lt 1 SPACE   &kp TAB    &kp RET  &kp RC(BACKSPACE)  &kp RALT
-			>;
-		};
-		
-		navigation {
-			// -----------------------------------------------------------------------------------------
-			// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-			// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-			// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-			//                    | GUI |     | SPC |   | ENT |     | ALT |
-			
-			bindings = <
-			&none  &none         &none     &none      &none       &none    &none    &none     &kp END        &kp HOME     &none      &none
-			&none  &kp LEFT_WIN  &kp LALT  &kp LCTRL  &kp LSHIFT  &none    &none    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &none
-			&none  &none         &none     &none      &none       &none    &none    &none     &kp PAGE_DOWN  &kp PAGE_UP  &none      &none
-			&none      &trans      &none    &kp RET  &kp BSPC  &kp DEL
-			>;
-		};
-		
-		number {
-			bindings = <
-			&none &none       &kp N7        &kp N8        &kp N9        &kp PLUS          &none           &none           &none           &none           &none            &none
-			&none &kp N0    &kp N4        &kp N5        &kp N6        &kp MINUS         &none           &sk RSHFT     &sk LCTRL     &sk LALT      &sk LGUI       &none
-			&none &none       &kp N1        &kp N2        &kp N3        &kp STAR          &none           &none           &kp BSPC           &none           &none       &none
-			&kp DOT       &kp FSLH      &kp EQUAL         &none           &none          &none
-			>;
-		};
-		
-		
-		raise_layer {
-			// -----------------------------------------------------------------------------------------
-			// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-			// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-			// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-			//                    | GUI |     | SPC |   | ENT |     | ALT |
-			
-			bindings = <
-			&kp TAB    &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
-			&kp LCTRL  &trans    &trans  &trans    &trans    &trans       &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
-			&kp LSHFT  &trans    &trans  &trans    &trans    &trans       &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-			&kp LGUI  &trans    &kp SPACE    &kp RET    &trans     &kp RALT
-			>;
-		};
-	};
+    combos {
+        compatible = "zmk,combos";
+
+        cut {
+            bindings = <&kp LC(X)>;
+            key-positions = <25 26>;
+            layers = <0>;
+        };
+
+        copy {
+            bindings = <&kp LC(K_COPY)>;
+            key-positions = <26 27>;
+            layers = <0>;
+        };
+
+        paste {
+            bindings = <&kp LC(P)>;
+            key-positions = <27 28>;
+            layers = <0>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        home {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
+            // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
+            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
+            //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+
+            bindings = <
+&none  &kp Q           &kp W       &kp E        &kp R         &kp T      &kp Y    &kp U                &kp I        &kp O            &kp P                    &none
+&none  &mt LEFT_WIN A  &mt LALT S  &mt LCTRL D  &mt LSHIFT F  &kp G      &kp H    &mt RSHIFT J         &mt RCTRL K  &mt RIGHT_ALT L  &mt RIGHT_WIN SEMICOLON  &none
+&none  &kp Z           &kp X       &kp C        &kp V         &kp B      &kp N    &kp M                &kp COMMA    &kp DOT          &kp FSLH                 &none
+                                   &kp ESC      &lt 1 SPACE   &kp TAB    &kp RET  &lt 2 RC(BACKSPACE)  &kp RALT
+            >;
+        };
+
+        navigation {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            bindings = <
+&none  &none         &none     &none      &none       &none    &none    &none     &kp END        &kp HOME     &none      &none
+&none  &kp LEFT_WIN  &kp LALT  &kp LCTRL  &kp LSHIFT  &none    &none    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &none
+&none  &none         &none     &none      &none       &none    &none    &none     &kp PAGE_DOWN  &kp PAGE_UP  &none      &none
+                               &none      &trans      &none    &kp RET  &kp BSPC  &kp DEL
+            >;
+        };
+
+        number {
+            bindings = <
+&none  &none   &kp N7  &kp N8   &kp N9    &kp PLUS     &none  &none      &none      &none     &none          &none
+&none  &kp N0  &kp N4  &kp N5   &kp N6    &kp MINUS    &none  &sk RSHFT  &sk LCTRL  &sk LALT  &sk LGUI       &none
+&none  &none   &kp N1  &kp N2   &kp N3    &kp STAR     &none  &none      &none      &none     &kp BACKSPACE  &none
+                       &kp DOT  &kp FSLH  &kp EQUAL    &none  &none      &none
+            >;
+        };
+
+        raise_layer {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
+            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            bindings = <
+&kp TAB    &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
+&kp LCTRL  &trans    &trans  &trans    &trans    &trans       &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
+&kp LSHFT  &trans    &trans  &trans    &trans    &trans       &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
+                             &kp LGUI  &trans    &kp SPACE    &kp RET    &trans     &kp RALT
+            >;
+        };
+    };
 };
