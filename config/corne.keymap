@@ -93,6 +93,11 @@
             key-positions = <27 28>;
             layers = <6>;
         };
+
+        colemak_dh_layer {
+            bindings = <&tog 7>;
+            key-positions = <1 2 3 4 10 9 8 7>;
+        };
     };
 
     keymap {
@@ -170,6 +175,15 @@
 &trans  &kp A  &kp S  &kp D       &kp F      &kp G           &kp H      &kp J   &kp K      &kp L    &kp SEMI  &trans
 &trans  &kp Z  &kp X  &kp C       &kp V      &kp B           &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH  &trans
                       &kp ESCAPE  &kp SPACE  &kp LEFT_ALT    &kp ENTER  &trans  &trans
+            >;
+        };
+
+        colemak-dh {
+            bindings = <
+&none  &kp Q           &kp W           &kp F        &kp P             &kp B     &kp J   &kp L              &kp U        &kp Y            &kp SEMI         &none
+&none  &mt LEFT_WIN A  &mt LEFT_ALT R  &mt LCTRL S  &mt LEFT_SHIFT T  &kp G     &kp M   &mt RIGHT_SHIFT N  &mt RCTRL E  &mt RIGHT_ALT I  &mt RIGHT_WIN O  &none
+&none  &kp Z           &kp X           &kp C        &kp D             &kp V     &kp K   &kp H              &kp COMMA    &kp DOT          &kp FSLH         &none
+                                       &trans       &trans            &trans    &trans  &trans             &trans
             >;
         };
     };
