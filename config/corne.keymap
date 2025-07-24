@@ -38,7 +38,6 @@
         game_mode {
             bindings = <&tog 6>;
             key-positions = <36 37 38 39 40 41>;
-            layers = <0>;
         };
 
         mmo_game_mode_n7 {
@@ -98,7 +97,6 @@
         colemak_dh_layer {
             bindings = <&tog 7>;
             key-positions = <1 2 3 4 10 9 8 7>;
-            layers = <0>;
         };
 
         task_view {
